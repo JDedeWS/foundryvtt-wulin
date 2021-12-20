@@ -22,6 +22,6 @@
   "secondaryTokenAttribute": "breath",
   "url": "https://github.com/JDedeWS/foundryvtt-wulin",
   "manifest": "https://raw.githubusercontent.com/JDedeWS/foundryvtt-wulin/main/system.json",
-  "download": "https://gitlab.com/foundrynet/worldbuilding/-/archive/release-061/worldbuilding-release-061.zip",
+  "download": "https://github.com/JDedeWS/foundryvtt-wulin/archive/refs/tags/0.0.0.1.zip",
   "license": "LICENSE.txt"
 }
