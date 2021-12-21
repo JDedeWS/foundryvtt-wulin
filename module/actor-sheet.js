@@ -1,21 +1,21 @@
 import { EntitySheetHelper } from "./helper.js";
 import {ATTRIBUTE_TYPES} from "./constants.js";
 
+
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class SimpleActorSheet extends ActorSheet {
+export class WulinActorSheet extends ActorSheet {
 
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["worldbuilding", "sheet", "actor"],
-      template: "systems/worldbuilding/templates/actor-sheet.html",
+      classes: ["wulin", "sheet", "actor"],
+      template: "systems/wulin/templates/actors/actor-sheet.html",
       width: 600,
       height: 600,
-      tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}],
-      scrollY: [".biography", ".items", ".attributes"],
+      tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}],      
       dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}]
     });
   }
@@ -26,7 +26,7 @@ export class SimpleActorSheet extends ActorSheet {
   getData() {
     const context = super.getData();
     EntitySheetHelper.getAttributeData(context.data);
-    context.shorthand = !!game.settings.get("worldbuilding", "macroShorthand");
+    context.shorthand = !!game.settings.get("wulin", "macroShorthand");
     context.systemData = context.data.data;
     context.dtypes = ATTRIBUTE_TYPES;
     return context;

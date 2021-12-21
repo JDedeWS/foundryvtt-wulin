@@ -1,30 +1,29 @@
 {
-"Actor": {
-  "types": ["character"],
-  "character": {
-    "biography": "",
-    "health": {
-      "value": 10,
-      "min": 0,
-      "max": 10
-    },
-    "power": {
-      "value": 5,
-      "min": 0,
-      "max": 5
-    },
-    "attributes": {},
-    "groups": {}
+  "Actor": {
+    "types": ["character", "npc"],
+    "character": {    
+      "souffle": 0,
+      "sang": 0,
+      "defensepassive":0,
+      "neigong":0,
+      "attributes": {
+        "allure":0,
+        "corps":0,
+        "esprit":0,
+        "forceinterieure":0,
+        "gongfu":0
+      },    
+      "groups": {}
+    }
+  },
+  "Item": {
+    "types": ["item"],
+    "item": {
+      "description": "",
+      "quantity": 1,
+      "weight": 0,
+      "attributes": {},
+      "groups": {}
+    }
   }
-},
-"Item": {
-  "types": ["item"],
-  "item": {
-    "description": "",
-    "quantity": 1,
-    "weight": 0,
-    "attributes": {},
-    "groups": {}
-  }
-}
 }

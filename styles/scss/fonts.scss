@@ -1,0 +1,13 @@
+// Font BrushtipTexe
+@font-face {
+    font-family: "BrushtipTexe";
+    src: url("../fonts/BrushtipTexe.ttf") format("truetype");
+}
+
+
+$font-secondary: "BrushtipTexe", sans-serif;
+
+h1,
+h4 {
+    font-family: $font-secondary;
+}

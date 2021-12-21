@@ -1,0 +1,29 @@
+<form class="{{cssClass}}" data-lang="{{localize 'I18N.Language'}}" autocomplete="off">
+    <img class="wulin-baner" src="/systems/wulin/assets/Wulin_baner.png"/>
+    {{!-- Sheet Header --}}
+    <header class="sheet-header">
+        
+        
+
+        <div class="header-fields identity-wrapper">
+            <h1 class="charname">
+                <img class="text-border-left" src="/systems/wulin/assets/Text border_old.png"/>
+                <input name="name" type="text" value="{{data.name}}" placeholder="Name"/>
+                <img class="text-border-right" src="/systems/wulin/assets/Text border_old.png"/>
+            </h1>    
+        </div>
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+
+    </header>
+
+    {{!-- Sheet Body --}}
+    {{log data}}
+
+    <span>
+        <input type="number" value="{{data.data.attributes.allure}}" name="{{data.attributes.allure}}" />
+        <input type="number" value="{{data.data.attributes.corps}}" name="{{data.attributes.corps}}" />
+        <input type="number" value="{{data.data.attributes.esprit}}" name="{{data.attributes.esprit}}" />
+        <input type="number" value="{{data.data.attributes.forceinterieure}}" name="{{data.attributes.forceinterieure}}" />
+        <input type="number" value="{{data.data.attributes.gongfu}}" name="{{data.attributes.gongfu}}" />
+    </span>
+</form>

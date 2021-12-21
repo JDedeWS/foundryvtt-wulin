@@ -5,7 +5,7 @@
  * @param {number} slot     The hotbar slot to use
  * @returns {Promise}
  */
-export async function createWorldbuildingMacro(data, slot) {
+export async function createwulinMacro(data, slot) {
   const command = `const roll = new Roll("${data.roll}", actor ? actor.getRollData() : {});
   roll.toMessage({speaker, flavor: "${data.label}"});`;
   let macro = game.macros.find(m => (m.name === item.label) && (m.command === command));

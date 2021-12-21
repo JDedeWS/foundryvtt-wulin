@@ -4,12 +4,12 @@
  */
 
 // Import Modules
-import { SimpleActor } from "./actor.js";
+import { WulinActor } from "./actor.js";
 import { SimpleItem } from "./item.js";
 import { SimpleItemSheet } from "./item-sheet.js";
-import { SimpleActorSheet } from "./actor-sheet.js";
+import { WulinActorSheet } from "./actor-sheet.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
-import { createWorldbuildingMacro } from "./macro.js";
+import { createwulinMacro } from "./macro.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -19,7 +19,7 @@ import { createWorldbuildingMacro } from "./macro.js";
  * Init hook.
  */
 Hooks.once("init", async function() {
-  console.log(`Initializing Simple Worldbuilding System`);
+  console.log(`Initializing Simple wulin System`);
 
   /**
    * Set an initiative formula for the system. This will be updated later.
@@ -30,24 +30,24 @@ Hooks.once("init", async function() {
     decimals: 2
   };
 
-  game.worldbuilding = {
-    SimpleActor,
-    createWorldbuildingMacro,
+  game.wulin = {
+    WulinActor,
+    createwulinMacro,
     useEntity: foundry.utils.isNewerVersion("9", game.version ?? game.data.version)
   };
 
   // Define custom Document classes
-  CONFIG.Actor.documentClass = SimpleActor;
+  CONFIG.Actor.documentClass = WulinActor;
   CONFIG.Item.documentClass = SimpleItem;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("worldbuilding", SimpleActorSheet, { makeDefault: true });
+  Actors.registerSheet("wulin", WulinActorSheet, { makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("worldbuilding", SimpleItemSheet, { makeDefault: true });
+  Items.registerSheet("wulin", SimpleItemSheet, { makeDefault: true });
 
   // Register system settings
-  game.settings.register("worldbuilding", "macroShorthand", {
+  game.settings.register("wulin", "macroShorthand", {
     name: "SETTINGS.SimpleMacroShorthandN",
     hint: "SETTINGS.SimpleMacroShorthandL",
     scope: "world",
@@ -57,18 +57,18 @@ Hooks.once("init", async function() {
   });
 
   // Register initiative setting.
-  game.settings.register("worldbuilding", "initFormula", {
+  game.settings.register("wulin", "initFormula", {
     name: "SETTINGS.SimpleInitFormulaN",
     hint: "SETTINGS.SimpleInitFormulaL",
     scope: "world",
     type: String,
-    default: "1d20",
+    default: "1d8",
     config: true,
     onChange: formula => _simpleUpdateInit(formula, true)
   });
 
   // Retrieve and assign the initiative formula setting.
-  const initFormula = game.settings.get("worldbuilding", "initFormula");
+  const initFormula = game.settings.get("wulin", "initFormula");
   _simpleUpdateInit(initFormula);
 
   /**
@@ -99,24 +99,24 @@ Hooks.once("init", async function() {
 /**
  * Macrobar hook.
  */
-Hooks.on("hotbarDrop", (bar, data, slot) => createWorldbuildingMacro(data, slot));
+Hooks.on("hotbarDrop", (bar, data, slot) => createwulinMacro(data, slot));
 
 /**
  * Adds the actor template context menu.
  */
 Hooks.on("getActorDirectoryEntryContext", (html, options) => {
-  const idAttr = game.worldbuilding.useEntity ? "entityId" : "documentId";
+  const idAttr = game.wulin.useEntity ? "entityId" : "documentId";
   // Define an actor as a template.
   options.push({
     name: game.i18n.localize("SIMPLE.DefineTemplate"),
     icon: '<i class="fas fa-stamp"></i>',
     condition: li => {
       const actor = game.actors.get(li.data(idAttr));
-      return !actor.getFlag("worldbuilding", "isTemplate");
+      return !actor.getFlag("wulin", "isTemplate");
     },
     callback: li => {
       const actor = game.actors.get(li.data(idAttr));
-      actor.setFlag("worldbuilding", "isTemplate", true);
+      actor.setFlag("wulin", "isTemplate", true);
     }
   });
 
@@ -126,11 +126,11 @@ Hooks.on("getActorDirectoryEntryContext", (html, options) => {
     icon: '<i class="fas fa-times"></i>',
     condition: li => {
       const actor = game.actors.get(li.data(idAttr));
-      return actor.getFlag("worldbuilding", "isTemplate");
+      return actor.getFlag("wulin", "isTemplate");
     },
     callback: li => {
       const actor = game.actors.get(li.data(idAttr));
-      actor.setFlag("worldbuilding", "isTemplate", false);
+      actor.setFlag("wulin", "isTemplate", false);
     }
   });
 });
@@ -139,18 +139,18 @@ Hooks.on("getActorDirectoryEntryContext", (html, options) => {
  * Adds the item template context menu.
  */
 Hooks.on("getItemDirectoryEntryContext", (html, options) => {
-  const idAttr = game.worldbuilding.useEntity ? "entityId" : "documentId";
+  const idAttr = game.wulin.useEntity ? "entityId" : "documentId";
   // Define an item as a template.
   options.push({
     name: game.i18n.localize("SIMPLE.DefineTemplate"),
     icon: '<i class="fas fa-stamp"></i>',
     condition: li => {
       const item = game.items.get(li.data(idAttr));
-      return !item.getFlag("worldbuilding", "isTemplate");
+      return !item.getFlag("wulin", "isTemplate");
     },
     callback: li => {
       const item = game.items.get(li.data(idAttr));
-      item.setFlag("worldbuilding", "isTemplate", true);
+      item.setFlag("wulin", "isTemplate", true);
     }
   });
 
@@ -160,11 +160,11 @@ Hooks.on("getItemDirectoryEntryContext", (html, options) => {
     icon: '<i class="fas fa-times"></i>',
     condition: li => {
       const item = game.items.get(li.data(idAttr));
-      return item.getFlag("worldbuilding", "isTemplate");
+      return item.getFlag("wulin", "isTemplate");
     },
     callback: li => {
       const item = game.items.get(li.data(idAttr));
-      item.setFlag("worldbuilding", "isTemplate", false);
+      item.setFlag("wulin", "isTemplate", false);
     }
   });
 });

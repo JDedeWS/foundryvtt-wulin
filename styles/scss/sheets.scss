@@ -1,0 +1,28 @@
+.wulin-baner{
+    border-style: none;
+    float: left;
+}
+.charname{
+    display: inline-block;    
+    & > input{
+        border-style: none;
+        padding-left: 60px;
+        //width: calc(100% - 110px);
+        //border-image: url("../assets/Text border.png") 30 round;
+        
+    }
+}
+
+.text-border-left{
+    position: absolute;
+    border-style: none;
+    float: left;    
+}
+
+.text-border-right{
+    position: absolute;
+    border-style: none;
+    transform: rotate(180deg);
+    float: right;
+}
+
